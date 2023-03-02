@@ -14,18 +14,20 @@ const loadDisplayData = (allData)=>{
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
-        <div class="card p-3">
-            <img class="img-fluid rounded" src="${image}" class="card-img-top" alt="...">
+        <div class="card p-3 shadow-lg">
+            <img class="rounded" src="${image}" class="card-img-top" alt="..." height="200">
             <div class="card-body">
-                <h5 class="card-title">Features</h5>
+                <h6 class="card-title fw-bold">Features</h6>
                 <div>
                     <p>1. ${features[0]}</p>               
                     <p>2. ${features[1]}</p>
                     <p>3. ${features[2]}</p>
                 </div>
-            </div>
-            <hr/>
-            <div>
+                <hr/>
+                <div>
+                    <h6 class="fw-bold">${name}</h6>
+                    <p>${published_in}</p>
+                </div>
             </div>
         </div>
         `;
