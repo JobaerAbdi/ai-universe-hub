@@ -15,10 +15,22 @@
     </header>
     <!-- --------------header-section-end---------------------------------- -->
 
+
+
     <!-- --------------main-section-start-------------------------------- -->
     <main>
+    <!-- --------------spinner-section-start-------------------------------- -->
+    <section class="mt-4">
+        <div class="d-flex justify-content-center">
+            <div id="spinner-id" class="spinner-border text-primary d-none" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </section>
+    <!-- --------------spinner-section-end---------------------------------- -->
+
     <!-- --------------card-section-start-------------------------------- -->
-        <section class="container mt-5">
+        <section class="container">
             <div id="card-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
             </div>
@@ -28,7 +40,7 @@
     <!-- --------------see-more-button-start--------------------------------->
         <section class="my-4">
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <button id="see-more-btn" onclick="seeMoreDisplay()" class="btn btn-danger" type="button">See More</button>
+                <button id="see-more-btn" onclick="seeMoreButton()" class="btn btn-danger" type="button">See More</button>
             </div>
         </section>
     <!-- --------------see-more-button-end-------------------------------- -->

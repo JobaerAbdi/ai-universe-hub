@@ -1,8 +1,14 @@
 const loadFetchData = ()=>{
+    const spinner = document.getElementById('spinner-id');
+    spinner.classList.remove('d-none');
     const url = 'https://openapi.programming-hero.com/api/ai/tools';
     fetch(url)
     .then(res => res.json())
-    .then(data => loadDisplayData(data.data.tools.slice(0,6)))
+    .then(data => {
+        const spinner = document.getElementById('spinner-id');
+        spinner.classList.add('d-none');
+        loadDisplayData(data.data.tools.slice(0,6))
+    })
     .catch(error => console.log(error));
 };
 
@@ -40,12 +46,18 @@ const loadDisplayData = (allData)=>{
     });
 };
 
-const seeMoreDisplay =()=>{
+const seeMoreButton =()=>{
     const seeMoreButton = document.getElementById('see-more-btn');
     seeMoreButton.style.display = 'none';
+    const spinner = document.getElementById('spinner-id');
+    spinner.classList.remove('d-none');
     const url = 'https://openapi.programming-hero.com/api/ai/tools';
     fetch(url)
     .then(res => res.json())
-    .then(data => loadDisplayData(data.data.tools.slice(6,12)))
+    .then(data => {
+        const spinner = document.getElementById('spinner-id');
+        spinner.classList.add('d-none');
+        loadDisplayData(data.data.tools.slice(6,12))
+    })
     .catch(error => console.log(error));
 };
