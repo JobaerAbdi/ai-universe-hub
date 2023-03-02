@@ -2,7 +2,7 @@ const loadFetchData = ()=>{
     const url = 'https://openapi.programming-hero.com/api/ai/tools';
     fetch(url)
     .then(res => res.json())
-    .then(data => loadDisplayData(data.data.tools))
+    .then(data => loadDisplayData(data.data.tools.slice(0,6)))
     .catch(error => console.log(error));
 };
 
@@ -24,13 +24,28 @@ const loadDisplayData = (allData)=>{
                     <p>3. ${features[2]}</p>
                 </div>
                 <hr/>
-                <div>
-                    <h6 class="fw-bold">${name}</h6>
-                    <p>${published_in}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="fw-bold">${name}</h6>
+                        <p>${published_in}</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary">Details</button>
+                    </div>
                 </div>
             </div>
         </div>
         `;
         mainContainer.appendChild(div);
     });
+};
+
+const seeMoreDisplay =()=>{
+    const seeMoreButton = document.getElementById('see-more-btn');
+    seeMoreButton.style.display = 'none';
+    const url = 'https://openapi.programming-hero.com/api/ai/tools';
+    fetch(url)
+    .then(res => res.json())
+    .then(data => loadDisplayData(data.data.tools.slice(6,12)))
+    .catch(error => console.log(error));
 };
