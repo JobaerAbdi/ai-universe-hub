@@ -66,12 +66,12 @@ const displayModalData = (allDetailsData)=>{
     const modalContainer = document.getElementById("modal-body");
     modalContainer.innerHTML = `
         <div class="row g-0">
-           <div class="col-md-6 px-4 d-flex flex-column border border-danger rounded-3">
+           <div class="col-sm-12 col-md-6 px-4 d-flex flex-column border border-danger rounded-3">
                 <div class="card-body">
                     <div class="mt-3">
                        <h5 class="fw-bold">${description}</h5>
                     </div>
-                    <div class="d-flex justify-content-between mt-5"> 
+                    <div class="d-lg-flex flex-row justify-content-between mt-5"> 
                         <div class="text-center fw-bold bg-body-secondary rounded-3 p-4 text-primary">
                         <small>${pricing[0].price ? pricing[0].price : 'Free of Cost'} ${pricing[0].plan}</small></div>
                         <div class="text-center fw-bold bg-body-secondary rounded-3 p-4 mx-2 text-info">
@@ -99,7 +99,7 @@ const displayModalData = (allDetailsData)=>{
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 px-4">
+            <div class="col-sm-12 col-md-6 px-4">
                 <div class="position-relative">
                     <img class="img-fluid rounded-3" src="${image_link[0]}" alt="">
                     <span id="accuracy" class="badge text-bg-danger position-absolute top-0 end-0 p-2">${accuracy.score ? accuracy.score : 'no'} accuracy</span>
