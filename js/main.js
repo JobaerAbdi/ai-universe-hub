@@ -56,7 +56,7 @@ const modalFetchData = (id)=>{
 
 
 const displayModalData = (allDetailsData)=>{
-    const {description,image_link,pricing,features,integrations,logo} = allDetailsData;
+    const {description,image_link,pricing,features,integrations,input_output_examples,accuracy} = allDetailsData;
     let featureName = [];
     for(let feature in features){
         let featureItems = features[feature].feature_name;
@@ -66,17 +66,21 @@ const displayModalData = (allDetailsData)=>{
     const modalContainer = document.getElementById("modal-body");
     modalContainer.innerHTML = `
         <div class="row g-0">
-           <div class="col-md-6 px-4">
+           <div class="col-md-6 px-4 d-flex flex-column border border-danger rounded-3">
                 <div class="card-body">
-                    <div>
+                    <div class="mt-3">
                        <h5 class="fw-bold">${description}</h5>
                     </div>
-                    <div class="d-flex justify-content-between my-4"> 
-                        <div class="text-center fw-bold bg-body-secondary rounded-3 p-4 text-primary"><small>${pricing[0].price} ${pricing[0].plan}</small></div>
-                        <div class="text-center fw-bold bg-body-secondary rounded-3 p-4 mx-2 text-info"><small>${pricing[1].price} ${pricing[1].plan}</small></div>
-                        <div class="text-center fw-bold bg-body-secondary rounded-3 p-4 text-danger"><small>${pricing[2].price} ${pricing[2].plan}</small></div>
-                        <div></div>
+                    <div class="d-flex justify-content-between mt-5"> 
+                        <div class="text-center fw-bold bg-body-secondary rounded-3 p-4 text-primary">
+                        <small>${pricing[0].price ? pricing[0].price : 'Free of Cost'} ${pricing[0].plan}</small></div>
+                        <div class="text-center fw-bold bg-body-secondary rounded-3 p-4 mx-2 text-info">
+                        <small>${pricing[1].price ? pricing[1].price : 'Free of Cost'} ${pricing[1].plan}</small></div>
+                        <div class="text-center fw-bold bg-body-secondary rounded-3 p-4 text-danger">
+                        <small>${pricing[2].price ? pricing[2].price : 'Free of Cost'} ${pricing[2].plan}</small></div>
                     </div>
+                </div>
+                <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
                              <h5 class="fw-bold">Features</h5>
@@ -86,100 +90,29 @@ const displayModalData = (allDetailsData)=>{
                         </div>
                         <div>
                              <h5 class="fw-bold">integrations</h5>
-                             <li>${integrations[0]}</li>               
-                             <li>${integrations[1]}</li>
-                             <li>${integrations[2]}</li>
+                             <li>${integrations[0] ? integrations[0] : 'No Data Found'}</li>               
+                             <li>${integrations[1] ? integrations[1] : 'No Data Found'}</li>
+                             <li>${integrations[2] ? integrations[2] : 'No Data Found'}</li>
+                             <li>${integrations[3] ? integrations[3] : 'No Data Found'}</li>
+                             <li>${integrations[4] ? integrations[4] : 'No Data Found'}</li>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 px-4">
-                <img class="img-fluid rounded-3" src="${image_link[0]}" alt="">
+                <div class="position-relative">
+                    <img class="img-fluid rounded-3" src="${image_link[0]}" alt="">
+                    <span id="accuracy" class="badge text-bg-danger position-absolute top-0 end-0 p-2">${accuracy.score ? accuracy.score : 'no'} accuracy</span>
+                </div>
+                <div class="mx-4 w-75 mx-auto mt-4 text-center">
+                    <h5 class="fw-bold">${input_output_examples[0].input}</h5>
+                    <p>${input_output_examples[0].output ? input_output_examples[0].output : 'No! Not Yet! Take a Break!!!'}</p>
+                </div>
             </div>
         </div>
     `;
 }; 
 
-
-
-
-
-/* const displayModalData = (allDetailsData)=>{
-    const {description,image_link,pricing,logo} = allDetailsData;
-    console.log(allDetailsData);
-    const modalContainer = document.getElementById("modal-body");
-    modalContainer.innerHTML = `
-    <div class="card">
-        <div class="row g-0">
-            <div class="col-md-6">
-                <div class="card-body">
-                    <div>
-                        <h6 class="fw-bold">${description}</h6>
-                    </div>
-                    <div class="d-flex justify-content-between"> 
-                        <div class="text-center fw-bold"><small>${pricing[0].price} ${pricing[0].plan}</small></div>
-                        <div class="text-center fw-bold"><small>${pricing[1].price} ${pricing[1].plan}</small></div>
-                        <div class="text-center fw-bold"><small>${pricing[2].price} ${pricing[2].plan}</small></div>
-                        <div></div>
-                    </div>
-                    <div></div>
-               </div>
-            </div>
-            <div class="col-md-6 bg-danger">
-                <img class="img-fluid rounded-3" src="${image_link[0]}" alt="">
-            </div>
-        </div>
-    </div>
-    `;
-}; */
-
-
-
-
-
-
-
-
-/* const displayModalData = (allDetailsData)=>{
-    const {} = allDetailsData;
-    //console.log(allDetailsData);
-    document.getElementById("modal-body").innerHTML = `
-    <div class= "card mb-3">
-        <div class="row g-0">
-            <div class="col-md-12">
-                <img src=${image_url} class="img-fluid rounded-start" alt="..." />
-            </div>
-            <div class="col-md-12 d-flex flex-column">
-                <div class="card-body">
-                    <h5 class="card-title">${title} <span class="badge text-bg-warning">
-                    ${others_info.is_trending ? "Trending" : "Not trending"}</span></h5>
-                    <p class="card-text">
-                        ${details}
-                    </p>
-                </div>
-                <div class="card-footer border-0 bg-body d-flex justify-content-between">
-                    <div class="d-flex gap-2">
-                        <img src=${author.img} class="img-fluid rounded-circle" 
-                        alt="..." height="40" width="40"/>
-                        <div>
-                            <p class="m-0 p-0">${author.name ? author.name : "Not available"}</p>
-                            <p class="m-0 p-0">${author.published_date}</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="fas fa-eye"></i>
-                        <p class="m-0 p-0">${total_view}</p>
-                    </div>
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="fas fa-star"></i>
-                        <p class="m-0 p-0">${rating.number}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    `;
-}; */
 
 const seeMoreButton =()=>{
     const seeMoreButton = document.getElementById('see-more-btn');
