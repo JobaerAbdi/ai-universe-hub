@@ -15,8 +15,8 @@ const loadFetchData = ()=>{
 const loadDisplayData = (allData)=>{
     const mainContainer = document.getElementById('card-container');
     allData.forEach(singleData=>{
-        const {image,features,name,published_in,id} = singleData;    // width="400" height="400"
-        // console.log(singleData);
+        const {image,features,name,published_in,id} = singleData;   
+        //console.log(singleData);
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
@@ -57,41 +57,46 @@ const modalFetchData = (id)=>{
 
 const displayModalData = (allDetailsData)=>{
     const {description,image_link,pricing,features,integrations,logo} = allDetailsData;
-    console.log(features);
+    let featureName = [];
+    for(let feature in features){
+        let featureItems = features[feature].feature_name;
+        featureName.push(featureItems);
+    };
     console.log(allDetailsData);
     const modalContainer = document.getElementById("modal-body");
     modalContainer.innerHTML = `
-            <div class="col-md-12">
+        <div class="row g-0">
+           <div class="col-md-6 px-4">
                 <div class="card-body">
                     <div>
-                       <h5>${description}</h5>
+                       <h5 class="fw-bold">${description}</h5>
                     </div>
-                    <div class="d-flex justify-content-between"> 
-                        <div class="text-center fw-bold w-25"><small>${pricing[0].price} ${pricing[0].plan}</small></div>
-                        <div class="text-center fw-bold w-25"><small>${pricing[1].price} ${pricing[1].plan}</small></div>
-                        <div class="text-center fw-bold w-50"><small>${pricing[2].price} ${pricing[2].plan}</small></div>
+                    <div class="d-flex justify-content-between my-4"> 
+                        <div class="text-center fw-bold bg-body-secondary rounded-3 p-4 text-primary"><small>${pricing[0].price} ${pricing[0].plan}</small></div>
+                        <div class="text-center fw-bold bg-body-secondary rounded-3 p-4 mx-2 text-info"><small>${pricing[1].price} ${pricing[1].plan}</small></div>
+                        <div class="text-center fw-bold bg-body-secondary rounded-3 p-4 text-danger"><small>${pricing[2].price} ${pricing[2].plan}</small></div>
                         <div></div>
                     </div>
                     <div class="d-flex justify-content-between">
                         <div>
-                             <h5>Features</h5>
-                             <li>${features}</li>               
+                             <h5 class="fw-bold">Features</h5>
+                             <li>${featureName[0]}</li>               
+                             <li>${featureName[1]}</li>               
+                             <li>${featureName[2]}</li>               
                         </div>
                         <div>
-                             <h5>integrations</h5>
+                             <h5 class="fw-bold">integrations</h5>
                              <li>${integrations[0]}</li>               
                              <li>${integrations[1]}</li>
                              <li>${integrations[2]}</li>
                         </div>
                     </div>
                 </div>
-
-                <div class="card-footer border-0 bg-body">
-                </div>
             </div>
-            <div class="col-md-12 bg-info">
+            <div class="col-md-6 px-4">
                 <img class="img-fluid rounded-3" src="${image_link[0]}" alt="">
             </div>
+        </div>
     `;
 }; 
 
