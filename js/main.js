@@ -14,9 +14,10 @@ const loadFetchData = ()=>{
 
 const loadDisplayData = (allData)=>{
     const mainContainer = document.getElementById('card-container');
+    mainContainer.innerHTML = '';
     allData.forEach(singleData=>{
         const {image,features,name,published_in,id} = singleData;   
-        //console.log(singleData);
+        //console.log(allData);
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
@@ -132,7 +133,33 @@ const seeMoreButton =()=>{
     .then(data => {
         const spinner = document.getElementById('spinner-id');
         spinner.classList.add('d-none');
-        loadDisplayData(data.data.tools.slice(6,12))
+        loadDisplayData(data.data.tools)
     })
     .catch(error => console.log(error));
 };
+
+
+
+const dataSort = ()=>{
+    const spinner = document.getElementById('spinner-id');
+    spinner.classList.remove('d-none');
+    const url = 'https://openapi.programming-hero.com/api/ai/tools';
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
+        const spinner = document.getElementById('spinner-id');
+        spinner.classList.add('d-none');
+        sortDataDisplay(data.data.tools);
+    })
+    .catch(error => console.log(error));
+};
+
+const sortDataDisplay = (data) =>{
+    let result = data.sort(
+        (a, b) =>
+        new Date(a.published_in).getTime() - new Date(b.published_in).getTime()
+    );
+    loadDisplayData(result);
+};
+dataSort();
+
