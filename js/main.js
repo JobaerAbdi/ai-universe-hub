@@ -63,6 +63,13 @@ const displayModalData = (allDetailsData)=>{
         featureName.push(featureItems);
     };
     console.log(allDetailsData);
+    let accuracyScore;
+    if(accuracy.score){
+        accuracyScore = `
+        <span class="badge text-bg-danger position-absolute top-0 end-0 p-2">  
+        ${accuracy.score * 100}% accuracy</span>
+        `;
+    };
     const modalContainer = document.getElementById("modal-body");
     modalContainer.innerHTML = `
         <div class="row g-0">
@@ -101,8 +108,8 @@ const displayModalData = (allDetailsData)=>{
             </div>
             <div class="col-sm-12 col-md-6 px-4">
                 <div class="position-relative">
-                    <img class="img-fluid rounded-3" src="${image_link[0]}" alt="">
-                    <span id="accuracy" class="badge text-bg-danger position-absolute top-0 end-0 p-2">${accuracy.score ? accuracy.score : 'no'} accuracy</span>
+                    <img class="img-fluid rounded-3" src="${image_link[0]}" alt=""> 
+                    ${accuracyScore ? accuracyScore : ''};    
                 </div>
                 <div class="mx-4 w-75 mx-auto mt-4 text-center">
                     <h5 class="fw-bold">${input_output_examples[0].input}</h5>
