@@ -1,3 +1,4 @@
+// ----------------api data fetch--------------------------
 const loadFetchData = ()=>{
     const spinner = document.getElementById('spinner-id');
     spinner.classList.remove('d-none');
@@ -12,12 +13,13 @@ const loadFetchData = ()=>{
     .catch(error => console.log(error));
 };
 
+
+// ----------------display all card data------------------------
 const loadDisplayData = (allData)=>{
     const mainContainer = document.getElementById('card-container');
     mainContainer.innerHTML = '';
     allData.forEach(singleData=>{
         const {image,features,name,published_in,id} = singleData;   
-        //console.log(allData);
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
@@ -47,6 +49,8 @@ const loadDisplayData = (allData)=>{
     });
 };
 
+
+// -----------------------modal data display ------------------------------------
 const modalFetchData = (id)=>{
     const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
     fetch(url)
@@ -54,7 +58,6 @@ const modalFetchData = (id)=>{
     .then(data => displayModalData(data.data))
     .catch(error => console.log(error));
 };
-
 
 const displayModalData = (allDetailsData)=>{
     const {description,image_link,pricing,features,integrations,input_output_examples,accuracy} = allDetailsData;
@@ -86,7 +89,7 @@ const displayModalData = (allDetailsData)=>{
                         <small>${pricing[1].price ? pricing[1].price : 'Free of Cost'} ${pricing[1].plan}</small></div>
                         <div class="text-center fw-bold bg-body-secondary rounded-3 p-4 text-danger">
                         <small>${pricing[2].price ? pricing[2].price : 'Free of Cost'} ${pricing[2].plan}</small></div>
-                    </div>
+                    </div> 
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
@@ -121,7 +124,7 @@ const displayModalData = (allDetailsData)=>{
     `;
 }; 
 
-
+// ----------------------show see-more-button ----------------------------
 const seeMoreButton =()=>{
     const seeMoreButton = document.getElementById('see-more-btn');
     seeMoreButton.style.display = 'none';
@@ -139,7 +142,7 @@ const seeMoreButton =()=>{
 };
 
 
-
+// -------------------------sort-by-date-show --------------------------------
 const dataSort = ()=>{
     const spinner = document.getElementById('spinner-id');
     spinner.classList.remove('d-none');
@@ -162,4 +165,3 @@ const sortDataDisplay = (data) =>{
     loadDisplayData(result);
 };
 dataSort();
-
